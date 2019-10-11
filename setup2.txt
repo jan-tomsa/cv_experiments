@@ -1,0 +1,372 @@
+import numpy as np
+import cv2                                                                                                        cap = cv2.VideoCapture(0)                                                                                         while(True):                                                                                                          # Capture frame-by-frame                                                                                          ret, frame = cap.read()                                                                                           # Our operations on the frame come here                                                                           gray = cv2.cvtColor(frame, cv2.COLOR_BGRimport numpy as np                                                                                                                                                                    import cv2                                                                                                                                                                            cap = cv2.VideoCapture(0)                                                                                                                                                             import cv2                                                                                                                                                                            cap = cv2.VideoCapture(0)                                                                                                                                                             while(True):                                                                                                                                                                              # Capture frame-by-frame                                                                                                                                                              ret, frame = cap.read()                                                                                                                                                               # Our operations on the frame come here                                                                                                                                               gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)                                                                                                                                        # Display the resulting frame                                                                                                                                                         cv2.imshow('frame',gray)                                                                                                                                                              if cv2.waitKey(1) & 0xFF == ord('q'):                                                                                                                                                     break                                                                                                                                                                             # When everything done, release the capture                                                                                                                                           cap.release()                                                                                                                                                                         cv2.destroyAllWindows()                                                                                                                                                           ~                                                                                                                                                                                     ~                                                                                                                                                                                     ~                                                                                                                                                                                     ~                                                                                                                                                                                     ~                                                                                                                                                                                     (__venv__) pi@raspberrypi:~/python/cv_pokus1 $ raspi
+raspi-config  raspi-gpio    raspistill    raspivid      raspividyuv   raspiyuv
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ raspi
+raspi-config  raspi-gpio    raspistill    raspivid      raspividyuv   raspiyuv
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ raspistill
+
+"raspistill" Camera App (commit 7cbfbd38d982 Tainted)
+
+Runs camera for specific time, and take JPG capture at end if requested
+
+usage: raspistill [options]
+
+Image parameter commands
+
+-q, --quality   : Set jpeg quality <0 to 100>
+-r, --raw       : Add raw bayer data to jpeg metadata
+-l, --latest    : Link latest complete image to filename <filename>
+-t, --timeout   : Time (in ms) before takes picture and shuts down (if not specified, set to 5s)
+-th, --thumb    : Set thumbnail parameters (x:y:quality) or none
+-d, --demo      : Run a demo mode (cycle through range of camera options, no capture)
+-e, --encoding  : Encoding to use for output file (jpg, bmp, gif, png)
+-x, --exif      : EXIF tag to apply to captures (format as 'key=value') or none
+-tl, --timelapse        : Timelapse mode. Takes a picture every <t>ms. %d == frame number (Try: -o img_%04d.jpg)
+-fp, --fullpreview      : Run the preview using the still capture resolution (may reduce preview fps)
+-k, --keypress  : Wait between captures for a ENTER, X then ENTER to exit
+-s, --signal    : Wait between captures for a SIGUSR1 or SIGUSR2 from another process
+-g, --gl        : Draw preview to texture instead of using video render component
+-gc, --glcapture        : Capture the GL frame-buffer instead of the camera image
+-bm, --burst    : Enable 'burst capture mode'
+-dt, --datetime : Replace output pattern (%d) with DateTime (MonthDayHourMinSec)
+-ts, --timestamp        : Replace output pattern (%d) with unix timestamp (seconds since 1970)
+-fs, --framestart       : Starting frame number in output pattern(%d)
+-rs, --restart  : JPEG Restart interval (default of 0 for none)
+
+GL parameter commands
+
+-gs, --glscene  : GL scene square,teapot,mirror,yuv,sobel,vcsm_square
+-gw, --glwin    : GL window settings <'x,y,w,h'>
+
+Common Settings commands
+
+-?, --help      : This help information
+-w, --width     : Set image width <size>
+-h, --height    : Set image height <size>
+-o, --output    : Output filename <filename> (to write to stdout, use '-o -'). If not specified, no file is saved
+-v, --verbose   : Output verbose information during run
+-cs, --camselect        : Select camera <number>. Default 0
+-md, --mode     : Force sensor mode. 0=auto. See docs for other modes available
+-gps, --gpsdexif        : Apply real-time GPS information to output (e.g. EXIF in JPG, annotation in video (requires libgps.so.22)
+
+Preview parameter commands
+
+-p, --preview   : Preview window settings <'x,y,w,h'>
+-f, --fullscreen        : Fullscreen preview mode
+-op, --opacity  : Preview window opacity (0-255)
+-n, --nopreview : Do not display a preview window
+
+Image parameter commands
+
+-sh, --sharpness        : Set image sharpness (-100 to 100)
+-co, --contrast : Set image contrast (-100 to 100)
+-br, --brightness       : Set image brightness (0 to 100)
+-sa, --saturation       : Set image saturation (-100 to 100)
+-ISO, --ISO     : Set capture ISO
+-vs, --vstab    : Turn on video stabilisation
+-ev, --ev       : Set EV compensation - steps of 1/6 stop
+-ex, --exposure : Set exposure mode (see Notes)
+-fli, --flicker : Set flicker avoid mode (see Notes)
+-awb, --awb     : Set AWB mode (see Notes)
+-ifx, --imxfx   : Set image effect (see Notes)
+-cfx, --colfx   : Set colour effect (U:V)
+-mm, --metering : Set metering mode (see Notes)
+-rot, --rotation        : Set image rotation (0-359)
+-hf, --hflip    : Set horizontal flip
+-vf, --vflip    : Set vertical flip
+-roi, --roi     : Set region of interest (x,y,w,d as normalised coordinates [0.0-1.0])
+-ss, --shutter  : Set shutter speed in microseconds
+-awbg, --awbgains       : Set AWB gains - AWB mode must be off
+-drc, --drc     : Set DRC Level (see Notes)
+-st, --stats    : Force recomputation of statistics on stills capture pass
+-a, --annotate  : Enable/Set annotate flags or text
+-3d, --stereo   : Select stereoscopic mode
+-dec, --decimate        : Half width/height of stereo image
+-3dswap, --3dswap       : Swap camera order for stereoscopic
+-ae, --annotateex       : Set extra annotation parameters (text size, text colour(hex YUV), bg colour(hex YUV), justify, x, y)
+-ag, --analoggain       : Set the analog gain (floating point)
+-dg, --digitalgain      : Set the digital gain (floating point)
+-set, --settings        : Retrieve camera settings and write to stdout
+
+
+Notes
+
+Exposure mode options :
+off,auto,night,nightpreview,backlight,spotlight,sports,snow,beach,verylong,fixedfps,antishake,fireworks
+
+Flicker avoid mode options :
+off,auto,50hz,60hz
+
+AWB mode options :
+off,auto,sun,cloud,shade,tungsten,fluorescent,incandescent,flash,horizon
+
+Image Effect mode options :
+none,negative,solarise,sketch,denoise,emboss,oilpaint,hatch,gpen,pastel,watercolour,film,blur,saturation,colourswap,washedout,posterise,colourpoint,colourbalance,cartoon
+
+Metering Mode options :
+average,spot,backlit,matrix
+
+Dynamic Range Compression (DRC) options :
+off,low,med,high
+
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ raspistill -d
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ raspistill -d
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ pip instal opencv-python
+ERROR: unknown command "instal" - maybe you meant "install"
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ pip install opencv-python
+Collecting opencv-python
+  Downloading https://www.piwheels.org/simple/opencv-python/opencv_python-3.4.4.19-cp35-cp35m-linux_armv6l.whl (7.2MB)
+    100% |████████████████████████████████| 7.2MB 5.2kB/s
+Requirement already satisfied: numpy>=1.12.1 in ./__venv__/lib/python3.5/site-packages (from opencv-python)
+Installing collected packages: opencv-python
+Successfully installed opencv-python-3.4.4.19
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ sudo apt-get install libhdf5-dev libhdf5-serial-dev libhdf5-100
+Načítají se seznamy balíků… Hotovo
+Vytváří se strom závislostí
+Načítají se stavové informace… Hotovo
+Následující balík byl nainstalován automaticky a již není potřeba:
+  realpath
+Pro jeho odstranění použijte „sudo apt autoremove“.
+Následující dodatečné balíky budou instalovány:
+  hdf5-helpers libaec-dev libaec0 libhdf5-cpp-100 libsz2
+Navrhované balíky:
+  libhdf5-doc
+Následující NOVÉ balíky budou nainstalovány:
+  hdf5-helpers libaec-dev libaec0 libhdf5-100 libhdf5-cpp-100 libhdf5-dev libhdf5-serial-dev libsz2
+0 aktualizováno, 8 nově instalováno, 0 k odstranění a 70 neaktualizováno.
+Nutno stáhnout 3 519 kB archivů.
+Po této operaci bude na disku použito dalších 12,8 MB.
+Chcete pokračovat? [Y/n]
+Stahuje se:1 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf hdf5-helpers armhf 1.10.0-patch1+docs-3+deb9u1 [36,0 kB]
+Stahuje se:2 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libaec0 armhf 0.3.2-1 [19,4 kB]
+Stahuje se:3 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libsz2 armhf 0.3.2-1 [5 836 B]
+Stahuje se:4 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libhdf5-100 armhf 1.10.0-patch1+docs-3+deb9u1 [1 201 kB]
+Stahuje se:5 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libhdf5-cpp-100 armhf 1.10.0-patch1+docs-3+deb9u1 [119 kB]
+Stahuje se:6 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libaec-dev armhf 0.3.2-1 [17,6 kB]
+Stahuje se:7 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libhdf5-dev armhf 1.10.0-patch1+docs-3+deb9u1 [2 093 kB]
+Stahuje se:8 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libhdf5-serial-dev all 1.10.0-patch1+docs-3+deb9u1 [27,7 kB]
+Staženo 3 519 kB za 4s (764 kB/s)
+oVybírá se dosud nevybraný balík hdf5-helpers.
+(Načítá se databáze … nyní je nainstalováno 112501 souborů a adresářů.)
+Připravuje se nahrazení …/0-hdf5-helpers_1.10.0-patch1+docs-3+deb9u1_armhf.deb …
+Rozbaluje se hdf5-helpers (1.10.0-patch1+docs-3+deb9u1) …
+Vybírá se dosud nevybraný balík libaec0:armhf.
+Připravuje se nahrazení …/1-libaec0_0.3.2-1_armhf.deb …
+Rozbaluje se libaec0:armhf (0.3.2-1) …
+Vybírá se dosud nevybraný balík libsz2:armhf.
+Připravuje se nahrazení …/2-libsz2_0.3.2-1_armhf.deb …
+Rozbaluje se libsz2:armhf (0.3.2-1) …
+Vybírá se dosud nevybraný balík libhdf5-100:armhf.
+Připravuje se nahrazení …/3-libhdf5-100_1.10.0-patch1+docs-3+deb9u1_armhf.deb …
+Rozbaluje se libhdf5-100:armhf (1.10.0-patch1+docs-3+deb9u1) …
+Vybírá se dosud nevybraný balík libhdf5-cpp-100:armhf.
+Připravuje se nahrazení …/4-libhdf5-cpp-100_1.10.0-patch1+docs-3+deb9u1_armhf.deb …
+Rozbaluje se libhdf5-cpp-100:armhf (1.10.0-patch1+docs-3+deb9u1) …
+Vybírá se dosud nevybraný balík libaec-dev:armhf.
+Připravuje se nahrazení …/5-libaec-dev_0.3.2-1_armhf.deb …
+Rozbaluje se libaec-dev:armhf (0.3.2-1) …
+Vybírá se dosud nevybraný balík libhdf5-dev.
+Připravuje se nahrazení …/6-libhdf5-dev_1.10.0-patch1+docs-3+deb9u1_armhf.deb …
+Rozbaluje se libhdf5-dev (1.10.0-patch1+docs-3+deb9u1) …
+Vybírá se dosud nevybraný balík libhdf5-serial-dev.
+Připravuje se nahrazení …/7-libhdf5-serial-dev_1.10.0-patch1+docs-3+deb9u1_all.deb …
+Rozbaluje se libhdf5-serial-dev (1.10.0-patch1+docs-3+deb9u1) …
+Nastavuje se balík libaec0:armhf (0.3.2-1) …
+Zpracovávají se spouštěče pro balík libc-bin (2.24-11+deb9u4) …
+Zpracovávají se spouštěče pro balík man-db (2.7.6.1-2) …
+
+
+
+Nastavuje se balík hdf5-helpers (1.10.0-patch1+docs-3+deb9u1) …
+Nastavuje se balík libsz2:armhf (0.3.2-1) …
+Nastavuje se balík libhdf5-100:armhf (1.10.0-patch1+docs-3+deb9u1) …
+Nastavuje se balík libaec-dev:armhf (0.3.2-1) …
+Nastavuje se balík libhdf5-cpp-100:armhf (1.10.0-patch1+docs-3+deb9u1) …
+Nastavuje se balík libhdf5-dev (1.10.0-patch1+docs-3+deb9u1) …
+update-alternatives: používám /usr/lib/arm-linux-gnueabihf/pkgconfig/hdf5-serial.pc pro poskytnutí /usr/lib/arm-linux-gnueabihf/pkgconfig/hdf5.pc (hdf5.pc) v automatickém režimu
+Nastavuje se balík libhdf5-serial-dev (1.10.0-patch1+docs-3+deb9u1) …
+Zpracovávají se spouštěče pro balík libc-bin (2.24-11+deb9u4) …
+
+
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ sudo apt-get install libqtgui4 libqtwebkit4 libqt4-test python3-pyqt5
+Načítají se seznamy balíků… Hotovo
+Vytváří se strom závislostí
+Načítají se stavové informace… Hotovo
+Následující balík byl nainstalován automaticky a již není potřeba:
+  realpath
+Pro jeho odstranění použijte „sudo apt autoremove“.
+Následující dodatečné balíky budou instalovány:
+  libjpeg8 libmng1 libqt4-dbus libqt4-network libqt4-xml libqt4-xmlpatterns libqt5clucene5 libqt5designer5 libqt5help5 libqt5test5 libqtcore4 libqtdbus4 python3-sip qdbus qt-at-spi
+  qtchooser qtcore4-l10n
+Navrhované balíky:
+  qt4-qtconfig python3-pyqt5-dbg
+Následující NOVÉ balíky budou nainstalovány:
+  libjpeg8 libmng1 libqt4-dbus libqt4-network libqt4-test libqt4-xml libqt4-xmlpatterns libqt5clucene5 libqt5designer5 libqt5help5 libqt5test5 libqtcore4 libqtdbus4 libqtgui4
+  libqtwebkit4 python3-pyqt5 python3-sip qdbus qt-at-spi qtchooser qtcore4-l10n
+0 aktualizováno, 21 nově instalováno, 0 k odstranění a 70 neaktualizováno.
+Nutno stáhnout 19,4 MB archivů.
+Po této operaci bude na disku použito dalších 76,2 MB.
+Chcete pokračovat? [Y/n]
+Stahuje se:1 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libjpeg8 armhf 8d1-2 [108 kB]
+Stahuje se:2 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libmng1 armhf 1.0.10+dfsg-3.1 [164 kB]
+Stahuje se:3 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf qtcore4-l10n all 4:4.8.7+dfsg-11+rpi1 [662 kB]
+Stahuje se:4 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqtcore4 armhf 4:4.8.7+dfsg-11+rpi1 [1 366 kB]
+Stahuje se:5 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt4-xml armhf 4:4.8.7+dfsg-11+rpi1 [126 kB]
+Stahuje se:6 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqtdbus4 armhf 4:4.8.7+dfsg-11+rpi1 [193 kB]
+Stahuje se:7 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf qtchooser armhf 63-g13a3d08-1 [21,9 kB]
+Stahuje se:8 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf qdbus armhf 4:4.8.7+dfsg-11+rpi1 [72,2 kB]
+Stahuje se:9 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt4-dbus armhf 4:4.8.7+dfsg-11+rpi1 [52,8 kB]
+Stahuje se:10 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt4-network armhf 4:4.8.7+dfsg-11+rpi1 [496 kB]
+Stahuje se:11 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt4-test armhf 4:4.8.7+dfsg-11+rpi1 [97,7 kB]
+Stahuje se:12 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt4-xmlpatterns armhf 4:4.8.7+dfsg-11+rpi1 [879 kB]
+Stahuje se:13 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt5clucene5 armhf 5.7.1-1 [217 kB]
+Stahuje se:14 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt5designer5 armhf 5.7.1-1 [2 639 kB]
+Stahuje se:15 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt5help5 armhf 5.7.1-1 [168 kB]
+Stahuje se:16 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqt5test5 armhf 5.7.1+dfsg-3+rpi1+deb9u1 [109 kB]
+Stahuje se:17 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqtgui4 armhf 4:4.8.7+dfsg-11+rpi1 [3 426 kB]
+Stahuje se:18 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf libqtwebkit4 armhf 2.3.4.dfsg-9.1 [6 811 kB]
+Stahuje se:19 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf python3-sip armhf 4.18.1+dfsg-2 [77,6 kB]
+Stahuje se:20 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf python3-pyqt5 armhf 5.7+dfsg-5 [1 622 kB]
+Stahuje se:21 http://mirror.dkm.cz/raspbian/raspbian stretch/main armhf qt-at-spi armhf 0.4.0-5 [47,4 kB]
+Staženo 19,4 MB za 16s (1 179 kB/s)
+Vybírá se dosud nevybraný balík libjpeg8:armhf.
+(Načítá se databáze … nyní je nainstalováno 112710 souborů a adresářů.)
+Připravuje se nahrazení …/00-libjpeg8_8d1-2_armhf.deb …
+Rozbaluje se libjpeg8:armhf (8d1-2) …
+Vybírá se dosud nevybraný balík libmng1:armhf.
+Připravuje se nahrazení …/01-libmng1_1.0.10+dfsg-3.1_armhf.deb …
+Rozbaluje se libmng1:armhf (1.0.10+dfsg-3.1) …
+Vybírá se dosud nevybraný balík qtcore4-l10n.
+Připravuje se nahrazení …/02-qtcore4-l10n_4%3a4.8.7+dfsg-11+rpi1_all.deb …
+Rozbaluje se qtcore4-l10n (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqtcore4:armhf.
+Připravuje se nahrazení …/03-libqtcore4_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqtcore4:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqt4-xml:armhf.
+Připravuje se nahrazení …/04-libqt4-xml_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqt4-xml:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqtdbus4:armhf.
+Připravuje se nahrazení …/05-libqtdbus4_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqtdbus4:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík qtchooser.
+Připravuje se nahrazení …/06-qtchooser_63-g13a3d08-1_armhf.deb …
+Rozbaluje se qtchooser (63-g13a3d08-1) …
+Vybírá se dosud nevybraný balík qdbus.
+Připravuje se nahrazení …/07-qdbus_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se qdbus (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqt4-dbus:armhf.
+Připravuje se nahrazení …/08-libqt4-dbus_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqt4-dbus:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqt4-network:armhf.
+Připravuje se nahrazení …/09-libqt4-network_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqt4-network:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqt4-test:armhf.
+Připravuje se nahrazení …/10-libqt4-test_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqt4-test:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqt4-xmlpatterns:armhf.
+Připravuje se nahrazení …/11-libqt4-xmlpatterns_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqt4-xmlpatterns:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqt5clucene5:armhf.
+Připravuje se nahrazení …/12-libqt5clucene5_5.7.1-1_armhf.deb …
+Rozbaluje se libqt5clucene5:armhf (5.7.1-1) …
+Vybírá se dosud nevybraný balík libqt5designer5:armhf.
+Připravuje se nahrazení …/13-libqt5designer5_5.7.1-1_armhf.deb …
+Rozbaluje se libqt5designer5:armhf (5.7.1-1) …
+Vybírá se dosud nevybraný balík libqt5help5:armhf.
+Připravuje se nahrazení …/14-libqt5help5_5.7.1-1_armhf.deb …
+Rozbaluje se libqt5help5:armhf (5.7.1-1) …
+Vybírá se dosud nevybraný balík libqt5test5:armhf.
+Připravuje se nahrazení …/15-libqt5test5_5.7.1+dfsg-3+rpi1+deb9u1_armhf.deb …
+Rozbaluje se libqt5test5:armhf (5.7.1+dfsg-3+rpi1+deb9u1) …
+Vybírá se dosud nevybraný balík libqtgui4:armhf.
+Připravuje se nahrazení …/16-libqtgui4_4%3a4.8.7+dfsg-11+rpi1_armhf.deb …
+Rozbaluje se libqtgui4:armhf (4:4.8.7+dfsg-11+rpi1) …
+Vybírá se dosud nevybraný balík libqtwebkit4:armhf.
+Připravuje se nahrazení …/17-libqtwebkit4_2.3.4.dfsg-9.1_armhf.deb …
+Rozbaluje se libqtwebkit4:armhf (2.3.4.dfsg-9.1) …
+
+Vybírá se dosud nevybraný balík python3-sip.
+Připravuje se nahrazení …/18-python3-sip_4.18.1+dfsg-2_armhf.deb …
+Rozbaluje se python3-sip (4.18.1+dfsg-2) …
+Vybírá se dosud nevybraný balík python3-pyqt5.
+Připravuje se nahrazení …/19-python3-pyqt5_5.7+dfsg-5_armhf.deb …
+Rozbaluje se python3-pyqt5 (5.7+dfsg-5) …
+Vybírá se dosud nevybraný balík qt-at-spi:armhf.
+Připravuje se nahrazení …/20-qt-at-spi_0.4.0-5_armhf.deb …
+Rozbaluje se qt-at-spi:armhf (0.4.0-5) …
+Nastavuje se balík qtcore4-l10n (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík qtchooser (63-g13a3d08-1) …
+Nastavuje se balík libqt5test5:armhf (5.7.1+dfsg-3+rpi1+deb9u1) …
+Nastavuje se balík libqt5clucene5:armhf (5.7.1-1) …
+Zpracovávají se spouštěče pro balík libc-bin (2.24-11+deb9u4) …
+Nastavuje se balík libqtcore4:armhf (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík python3-sip (4.18.1+dfsg-2) …
+
+Zpracovávají se spouštěče pro balík man-db (2.7.6.1-2) …
+Nastavuje se balík libqt5designer5:armhf (5.7.1-1) …
+Nastavuje se balík libqt4-test:armhf (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík libqt4-xml:armhf (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík libjpeg8:armhf (8d1-2) …
+Nastavuje se balík libmng1:armhf (1.0.10+dfsg-3.1) …
+Nastavuje se balík libqt5help5:armhf (5.7.1-1) …
+Nastavuje se balík libqtdbus4:armhf (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík libqtgui4:armhf (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík python3-pyqt5 (5.7+dfsg-5) …
+
+Nastavuje se balík qdbus (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík libqt4-dbus:armhf (4:4.8.7+dfsg-11+rpi1) …
+
+Nastavuje se balík libqt4-network:armhf (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík qt-at-spi:armhf (0.4.0-5) …
+Nastavuje se balík libqt4-xmlpatterns:armhf (4:4.8.7+dfsg-11+rpi1) …
+Nastavuje se balík libqtwebkit4:armhf (2.3.4.dfsg-9.1) …
+Zpracovávají se spouštěče pro balík libc-bin (2.24-11+deb9u4) …
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ sudo apt-get install libatlas-base-dev
+Načítají se seznamy balíků… Hotovo
+Vytváří se strom závislostí
+Načítají se stavové informace… Hotovo
+libatlas-base-dev je již nejnovější verze (3.10.3-1+rpi1).
+Následující balík byl nainstalován automaticky a již není potřeba:
+  realpath
+Pro jeho odstranění použijte „sudo apt autoremove“.
+0 aktualizováno, 0 nově instalováno, 0 k odstranění a 70 neaktualizováno.
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ sudo apt autoremove
+Načítají se seznamy balíků… Hotovo
+Vytváří se strom závislostí
+Načítají se stavové informace… Hotovo
+Následující balíky budou ODSTRANĚNY:
+  realpath
+0 aktualizováno, 0 nově instalováno, 1 k odstranění a 70 neaktualizováno.
+Po této operaci bude na disku uvolněno 461 kB.
+Chcete pokračovat? [Y/n]
+(Načítá se databáze … nyní je nainstalováno 113028 souborů a adresářů.)
+Odstraňuje se balík realpath (8.26-3) …
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ sudo apt-get install libjasper-dev
+Načítají se seznamy balíků… Hotovo
+Vytváří se strom závislostí
+Načítají se stavové informace… Hotovo
+libjasper-dev je již nejnovější verze (1.900.1-debian1-2.4+deb8u1).
+0 aktualizováno, 0 nově instalováno, 0 k odstranění a 70 neaktualizováno.
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $ pip install "picamera[array]"
+Collecting picamera[array]
+  Downloading https://www.piwheels.org/simple/picamera/picamera-1.13-py3-none-any.whl (154kB)
+    100% |████████████████████████████████| 163kB 183kB/s
+Requirement already satisfied: numpy; extra == "array" in ./__venv__/lib/python3.5/site-packages (from picamera[array])
+Installing collected packages: picamera
+Successfully installed picamera-1.13
+(__venv__) pi@raspberrypi:~/python/cv_pokus1 $
+
+
+
+
+
+
+
+sudo modprobe bcm2835-v4l2
